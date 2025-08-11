@@ -1,6 +1,5 @@
 'use strict';
 
-// Generate secret number
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
@@ -15,11 +14,15 @@ document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
 
-  // When there is no input
+  // No input
   if (!guess) {
     displayMessage('⛔️ No number!');
 
-    // When player wins
+    // Invalid range
+  } else if (guess < 1 || guess > 20) {
+    displayMessage('⚠️ Invalid number! Enter between 1 and 20.');
+
+    // Player wins
   } else if (guess === secretNumber) {
     displayMessage('🎉 Correct Number!');
     document.querySelector('.number').textContent = secretNumber;
@@ -32,7 +35,7 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highscore;
     }
 
-    // When guess is wrong
+    // Guess is wrong
   } else if (guess !== secretNumber) {
     if (score > 1) {
       displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
@@ -57,10 +60,4 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
-});
-// Add event listener for keydown to check the guess
-document.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    document.querySelector('.check').click();
-  }
 });
