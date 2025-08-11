@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 // Generate secret number
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
@@ -59,4 +57,10 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('body').style.backgroundColor = '#222';
   document.querySelector('.number').style.width = '15rem';
+});
+// Add event listener for keydown to check the guess
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    document.querySelector('.check').click();
+  }
 });
